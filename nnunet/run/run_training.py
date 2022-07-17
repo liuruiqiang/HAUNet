@@ -122,9 +122,6 @@ def main():
     run_mixed_precision = not fp32
 
     val_folder = args.val_folder
-    # interp_order = args.interp_order
-    # interp_order_z = args.interp_order_z
-    # force_separate_z = args.force_separate_z
 
     if not task.startswith("Task"):
         task_id = int(task)
@@ -140,10 +137,6 @@ def main():
     str_heads = "".join([str(item) for item in heads])
     plans_file, output_folder_name, dataset_directory, batch_dice, stage, \
     trainer_class = get_default_configuration(network, task, network_trainer, plans_identifier)
-    if network_trainer == 'nnUNetTrainerV2_TeAddAttentionUNet2d':
-        output_folder_name = output_folder_name + '_batch12' + 'heads_'+str_heads
-    # else:
-    #     output_folder_name = output_folder_name + '_batch12'
     if trainer_class is None:
         raise RuntimeError("Could not find trainer class in nnunet.training.network_training")
 
@@ -156,17 +149,8 @@ def main():
         assert issubclass(trainer_class,
                           nnUNetTrainer), "network_trainer was found but is not derived from nnUNetTrainer"
 
-    # trainer = trainer_class(plans_file, fold,norm_cfg, output_folder=output_folder_name, dataset_directory=dataset_directory,
-    #                         batch_dice=batch_dice, stage=stage, unpack_data=decompress_data,
-    #                         deterministic=deterministic,heads = heads,multi_gran_opt=multi_gran_opt,gran_levels=gran_levels,
-    #                         fp16=run_mixed_precision)
-    if network_trainer == 'nnUNetTrainerV2_TeAddAttentionUNet2d':
-        trainer = trainer_class(plans_file, fold, output_folder=output_folder_name, dataset_directory=dataset_directory,
-                            batch_dice=batch_dice, stage=stage, unpack_data=decompress_data,
-                            deterministic=deterministic,
-                            fp16=run_mixed_precision,heads=heads)
-    else:
-        trainer = trainer_class(plans_file, fold, output_folder=output_folder_name, dataset_directory=dataset_directory,
+
+    trainer = trainer_class(plans_file, fold, output_folder=output_folder_name, dataset_directory=dataset_directory,
                                 batch_dice=batch_dice, stage=stage, unpack_data=decompress_data,
                                 deterministic=deterministic,
                                 fp16=run_mixed_precision,heads=heads)
