@@ -1,0 +1,2 @@
+nnUNet_evaluate_folder -ref /home/hci/ruiqiang/Nucleus_project/DATASET/nnUNet_raw/nnUNet_raw_data/Task002_Nucleus/labelsTs_fold0 -pred /home/hci/ruiqiang/Nucleus_project/DATASET/nnUNet_raw/nnUNet_raw_data/Task002_Nucleus/inferTs_TeAddAttentionUnet_888_new_fold0 -l 1 2
+nnUNet_evaluate_folder -ref /home/hci/ruiqiang/Nucleus_project/DATASET/nnUNet_raw/nnUNet_raw_data/Task002_Nucleus/labelsTs_fold2 -pred /home/hci/ruiqiang/Nucleus_project/DATASET/nnUNet_raw/nnUNet_raw_data/Task002_Nucleus/inferTs_TeAddAttentionUnet_888_new_fold2 -l 1 2
